@@ -9,7 +9,7 @@ leaves the HAM a great deal of freedom to import, export in/to any format and ma
 
 The typical usage of such a log program is for running on an ideally small or embedded computer such as
 [RaspberryPi2](https://en.wikipedia.org/wiki/Raspberry_Pi), as a HAM computer, where possibly also other HAM related
-software such as [fldigi](sourceforge.net/projects/fldigi/), and [dongles](http://www.funcubedongle.com/) are also running.
+software such as [fldigi](https://sourceforge.net/projects/fldigi/), and [dongles](http://www.funcubedongle.com/) are also running.
 
 The name of this program is inspired by other HAM logger software available that have an animal name
 in their title.
