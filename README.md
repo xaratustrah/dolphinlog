@@ -1,5 +1,5 @@
 # otterlog
-<img src="https://raw.githubusercontent.com/xaratustrah/otterlog/otter.png" width=“128”>
+<img src="https://github.com/xaratustrah/otterlog/blob/master/otter.png" width=“128”>
 This is a log program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for daily use.
 There are tons of HAM log programs out there. This is yet another one, aiming to be ultra simple by using
 only the command line interface in order to store QSO data in a SQLite database. There are no editors,
