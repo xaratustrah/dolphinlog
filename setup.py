@@ -23,7 +23,7 @@ setup(
     author_email='shahab.sanjari@gmail.com',
     url='https://github.com/xaratustrah/otterlog',  # use the URL to the github repo
     download_url='https://github.com/xaratustrah/otterlog/tarball/{}'.format(__version__),
-    scripts=['otterlog'],
+    scripts=['otterlog/otterlog'],
     license='GPL v2',
     keywords=['HAM', 'Logging', 'Amateur Radio', 'QSO'],  # arbitrary keywords
     classifiers=classifiers,
