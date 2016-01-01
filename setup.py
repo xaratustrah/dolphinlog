@@ -3,9 +3,6 @@
 from otterlog.version import __version__
 from distutils.core import setup
 
-print(__version__)
-exit()
-
 setup(
     name='otterlog',
     packages=['otterlog'],  # this must be the same as the name above
