@@ -32,28 +32,40 @@ class LogData(object):
 
         # QSO related fields
 
-        self.date = None
-        self.time = None
+        self.qso_date = None
+        self.time_on = None
         self.call = None
-        self.om = None
-        self.qth = None
-        self.band = None
         self.mode = None
-        self.qro = None
-        self.rst = None
+        self.band = None
+        self.freq = None
+        self.prop_mode = None
+        self.programid = 'OTTERLOG'
+        self.qslmeg = None
+        self.rst_sent = None
+        self.name = None
+        self.rst_rcvd = None
+        self.rx_pwr = None
+        self.tx_pwr = None
+        self.gridsquare = None
         self.notes = None
 
     def __str__(self):
-        return '{} {} {} {} {} {} {} {} {} {}'.format(self.date,
-                                                      self.time,
-                                                      self.call,
-                                                      self.om,
-                                                      self.qth,
-                                                      self.band,
-                                                      self.mode,
-                                                      self.qro,
-                                                      self.rst,
-                                                      self.notes)
+        return '{} {} {} {} {} {} {} {} {} {} {} {} {} {} {} {}'.format(self.qso_date,
+                                                                        self.time_on,
+                                                                        self.call,
+                                                                        self.mode,
+                                                                        self.band,
+                                                                        self.freq,
+                                                                        self.prop_mode,
+                                                                        self.programid,
+                                                                        self.qslmeg,
+                                                                        self.rst_sent,
+                                                                        self.name,
+                                                                        self.rst_rcvd,
+                                                                        self.rx_pwr,
+                                                                        self.tx_pwr,
+                                                                        self.gridsquare,
+                                                                        self.notes)
 
     def create_db(self):
         """
@@ -67,18 +79,24 @@ class LogData(object):
             self.cursor = self.db.cursor()
             # Check if table users does not exist and create it
             self.cursor.execute('''CREATE TABLE IF NOT EXISTS
-                          qso(id INTEGER PRIMARY KEY AUTOINCREMENT,
-                          date TEXT,
-                          time TEXT,
-                          call TEXT,
-                          om TEXT,
-                          qth TEXT,
-                          band TEXT,
-                          mode TEXT,
-                          qro REAL,
-                          rst INTEGER,
-                          notes TEXT,
-                          relatedtoqso INTEGER)''')
+                                qso(id INTEGER PRIMARY KEY AUTOINCREMENT,
+                                qso_date   TEXT,
+                                time_on	TEXT,
+                                call	TEXT,
+                                mode	TEXT,
+                                band	TEXT,
+                                freq	REAL,
+                                prop_mode	TEXT,
+                                programid	TEXT,
+                                qslmeg	TEXT,
+                                rst_sent	INTEGER,
+                                name	TEXT,
+                                rst_rcvd	INTEGER,
+                                rx_pwr	REAL,
+                                tx_pwr	REAL,
+                                gridsquare	TEXT,
+                                notes      TEXT
+                                )''')
 
             # Commit the change
             self.db.commit()
@@ -101,16 +119,39 @@ class LogData(object):
         """
         try:
             self.cursor.execute(
-                'INSERT INTO qso(date, time, call, om, qth, band, mode, qro, rst, notes) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                (self.date,
-                 self.time,
+                '''INSERT INTO qso(
+                qso_date,
+                time_on,
+                call,
+                mode,
+                band,
+                freq,
+                prop_mode,
+                programid,
+                qslmeg,
+                rst_sent,
+                name,
+                rst_rcvd,
+                rx_pwr,
+                tx_pwr,
+                gridsquare,
+                notes)
+                VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                (self.qso_date,
+                 self.time_on,
                  self.call,
-                 self.om,
-                 self.qth,
-                 self.band,
                  self.mode,
-                 self.qro,
-                 self.rst,
+                 self.band,
+                 self.freq,
+                 self.prop_mode,
+                 self.programid,
+                 self.qslmeg,
+                 self.rst_sent,
+                 self.name,
+                 self.rst_rcvd,
+                 self.rx_pwr,
+                 self.tx_pwr,
+                 self.gridsquare,
                  self.notes))
             # Commit the change
             self.db.commit()
@@ -126,8 +167,8 @@ class LogData(object):
         # Close the db connection
         self.db.close()
 
+    # ------------ MAIN ----------------------------
 
-# ------------ MAIN ----------------------------
 
 if __name__ == '__main__':
 
@@ -158,23 +199,24 @@ if __name__ == '__main__':
 
     log_data = LogData(filename=fn)
 
-    log_data.date = input('Local date YY-MM-DD [empty for today]: ')
-    if log_data.date == '':
-        log_data.date = datetime.datetime.now().strftime('%Y-%m-%d')
-    log_data.time = input('Local time HH:MM [empty for just now]: ')
-    if log_data.time == '':
-        log_data.time = datetime.datetime.now().strftime('%H:%M')
+    log_data.qso_date = input('Date YYMMDD [empty for today]: ')
+    if log_data.qso_date == '':
+        log_data.qso_date = datetime.datetime.now().strftime('%Y%m%d')
+    log_data.time_on = input('UTC time HHMM [empty for just now]: ')
+    if log_data.time_on == '':
+        log_data.time_on = datetime.datetime.now().strftime('%H%M')
     log_data.call = input('OM\'s call sign: ')
-    log_data.om = input('OM\'s name: ')
-    log_data.qth = input('OM\'s QTH: ')
-    log_data.band = input('Band : ')
+    log_data.name = input('OM\'s name : ')
+    log_data.gridsquare = input('OM\'s locator : ')
     log_data.mode = input('Mode : ')
+    log_data.band = input('Band : ')
+    log_data.freq = input('Frequncy : ')
 
     while True:
-        log_data.qro = input('Your power [W] : ')
-        if not log_data.qro == '':
+        log_data.tx_pwr = input('Your power : ')
+        if not log_data.tx_pwr == '':
             try:
-                log_data.qro = float(log_data.qro)
+                log_data.tx_pwr = float(log_data.tx_pwr)
             except ValueError:
                 print("Sorry, I didn't understand that.")
                 continue
@@ -184,21 +226,53 @@ if __name__ == '__main__':
             break
 
     while True:
-        log_data.rst = input('OM\'s RST : ')
-        if not log_data.rst == '':
+        log_data.rst_sent = input('Your RST : ')
+        if not log_data.rst_sent == '':
             try:
-                log_data.rst = int(log_data.rst)
+                log_data.rst_sent = int(log_data.rst_sent)
             except ValueError:
                 print("Sorry, I didn't understand that.")
                 continue
-            if log_data.rst > 599:
+            if log_data.rst_sent > 599:
                 print('RST can not be greater than 599.')
             else:
                 break
         else:
             break
 
-    log_data.notes = input('Any other comments? : ')
+    while True:
+        log_data.rx_pwr = input('OM\'s power : ')
+        if not log_data.rx_pwr == '':
+            try:
+                log_data.rx_pwr = float(log_data.rx_pwr)
+            except ValueError:
+                print("Sorry, I didn't understand that.")
+                continue
+            else:
+                break
+        else:
+            break
+
+    while True:
+        log_data.rst_rcvd = input('OM\'s RST : ')
+        if not log_data.rst_rcvd == '':
+            try:
+                log_data.rst_rcvd = int(log_data.rst_rcvd)
+            except ValueError:
+                print("Sorry, I didn't understand that.")
+                continue
+            if log_data.rst_rcvd > 599:
+                print('RST can not be greater than 599.')
+            else:
+                break
+        else:
+            break
+
+    log_data.prop_mode = input('Propagation Mode : ')
+    log_data.qslmeg = input('QSL Message : ')
+    log_data.notes = input('Comments : ')
+
+    # -----
 
     log_data.create_db()
     log_data.insert_into_db()
