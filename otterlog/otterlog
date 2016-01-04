@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Yet another QSO logger for HAMs.
+Yet another HAM radio logger using SQLite.
 
 Dec 2015 - xaratustra
 
@@ -10,9 +10,8 @@ import sqlite3
 import argparse
 import logging as log
 import os
+import sys
 import datetime
-
-verbose = False
 
 
 class LogData(object):
@@ -80,22 +79,22 @@ class LogData(object):
             # Check if table users does not exist and create it
             self.cursor.execute('''CREATE TABLE IF NOT EXISTS
                                 qso(id INTEGER PRIMARY KEY AUTOINCREMENT,
-                                qso_date   TEXT,
+                                qso_date TEXT,
                                 time_on	TEXT,
-                                call	TEXT,
-                                mode	TEXT,
-                                band	TEXT,
-                                freq	REAL,
-                                prop_mode	TEXT,
-                                programid	TEXT,
-                                qslmeg	TEXT,
-                                rst_sent	INTEGER,
-                                name	TEXT,
-                                rst_rcvd	INTEGER,
-                                rx_pwr	REAL,
-                                tx_pwr	REAL,
-                                gridsquare	TEXT,
-                                notes      TEXT
+                                call TEXT,
+                                mode TEXT,
+                                band TEXT,
+                                freq REAL,
+                                prop_mode TEXT,
+                                programid TEXT,
+                                qslmeg TEXT,
+                                rst_sent INTEGER,
+                                name TEXT,
+                                rst_rcvd INTEGER,
+                                rx_pwr REAL,
+                                tx_pwr REAL,
+                                gridsquare TEXT,
+                                notes TEXT
                                 )''')
 
             # Commit the change
@@ -167,8 +166,10 @@ class LogData(object):
         # Close the db connection
         self.db.close()
 
-    # ------------ MAIN ----------------------------
+        # ------------ MAIN ----------------------------
 
+
+verbose = False
 
 if __name__ == '__main__':
 
@@ -180,8 +181,14 @@ if __name__ == '__main__':
     parser.add_argument('-f', '--filename', nargs='?', type=str, help='Name of the database file.',
                         default=default_db_filename)
     parser.add_argument('-v', '--verbose', help='Increase output verbosity', action='store_true')
+    parser.add_argument('--version', help='Print version', action='store_true')
 
     args = parser.parse_args()
+
+    if args.version:
+        print('{} {}'.format(scriptname, __version__))
+        sys.exit()
+
     if args.verbose:
         log.basicConfig(level=log.DEBUG)
         verbose = True
@@ -199,18 +206,30 @@ if __name__ == '__main__':
 
     log_data = LogData(filename=fn)
 
-    log_data.qso_date = input('Date YYMMDD [empty for today]: ')
+    log_data.qso_date = input('UTC Date YYYYMMDD [empty for today]: ')
     if log_data.qso_date == '':
-        log_data.qso_date = datetime.datetime.now().strftime('%Y%m%d')
+        log_data.qso_date = datetime.datetime.utcnow().strftime('%Y%m%d')
     log_data.time_on = input('UTC time HHMM [empty for just now]: ')
     if log_data.time_on == '':
-        log_data.time_on = datetime.datetime.now().strftime('%H%M')
+        log_data.time_on = datetime.datetime.utcnow().strftime('%H%M')
     log_data.call = input('OM\'s call sign: ')
     log_data.name = input('OM\'s name : ')
     log_data.gridsquare = input('OM\'s locator : ')
     log_data.mode = input('Mode : ')
     log_data.band = input('Band : ')
-    log_data.freq = input('Frequncy : ')
+
+    while True:
+        log_data.freq = input('Frequncy : ')
+        if not log_data.freq == '':
+            try:
+                log_data.freq = float(log_data.freq)
+            except ValueError:
+                print("Sorry, I didn't understand that.")
+                continue
+            else:
+                break
+        else:
+            break
 
     while True:
         log_data.tx_pwr = input('Your power : ')
