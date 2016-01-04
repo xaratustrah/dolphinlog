@@ -1,7 +1,7 @@
 # PyPI setup file
 
+from setuptools import setup
 from otterlog.version import __version__
-from distutils.core import setup
 
 classifiers = [
     'Environment :: Console',
@@ -23,8 +23,12 @@ setup(
     author_email='shahab.sanjari@gmail.com',
     url='https://github.com/xaratustrah/otterlog',  # use the URL to the github repo
     download_url='https://github.com/xaratustrah/otterlog/tarball/{}'.format(__version__),
-    scripts=['otterlog/otterlog'],
+    entry_points={
+        'console_scripts': [
+            'otterlog = otterlog.__main__:main'
+        ]
+    },
     license='GPLv2',
     keywords=['HAM', 'Logging', 'Amateur Radio', 'QSO'],  # arbitrary keywords
-    classifiers=classifiers,
+    classifiers=classifiers
 )
