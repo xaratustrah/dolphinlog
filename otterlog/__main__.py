@@ -11,11 +11,12 @@ import logging as log
 import os
 import sys
 import datetime
-from version import __version__
-from logdata import LogData
+from otterlog.version import __version__
+from otterlog.qsodata import QSOData
 
 def main():
-    scriptname = __file__.split('/')[1].split('.')[0]
+    #scriptname = __file__.split('/')[1].split('.')[0]
+    scriptname = 'otterlog'
     home_folder = os.path.expanduser('~') + '/.{}/'.format(scriptname)
     default_db_filename = home_folder + '{}.sqlite'.format(scriptname)
 
@@ -45,7 +46,7 @@ def main():
     if not fn.lower().endswith('.sqlite'):
         fn += '.sqlite'
 
-    log_data = LogData(filename=fn)
+    log_data = QSOData(filename=fn)
 
     log_data.qso_date = input('UTC Date YYYYMMDD [empty for today]: ')
     if log_data.qso_date == '':

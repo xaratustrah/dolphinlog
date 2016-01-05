@@ -9,7 +9,7 @@ import sqlite3
 import logging as log
 
 
-class LogData(object):
+class QSOData(object):
     """
     Class for handling log data
     """

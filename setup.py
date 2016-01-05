@@ -1,6 +1,6 @@
 # PyPI setup file
 
-from setuptools import setup
+from setuptools import setup, find_packages
 from otterlog.version import __version__
 
 classifiers = [
@@ -16,7 +16,7 @@ classifiers = [
 
 setup(
     name='otterlog',
-    packages=['otterlog'],  # this must be the same as the name above
+    packages=find_packages(),
     version=__version__,
     description='Yet another HAM radio logger using SQLite',
     author='Xaratustra',
