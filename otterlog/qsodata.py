@@ -7,6 +7,7 @@ Dec 2015 - xaratustra
 
 import sqlite3
 import logging as log
+import datetime
 
 
 class QSOData(object):
@@ -33,7 +34,7 @@ class QSOData(object):
         self.band = None
         self.freq = None
         self.prop_mode = None
-        self.programid = 'OTTERLOG'
+        self.programid = 'otterlog'
         self.qslmeg = None
         self.rst_sent = None
         self.name = None
@@ -160,3 +161,40 @@ class QSOData(object):
     def close_db(self):
         # Close the db connection
         self.db.close()
+
+    @staticmethod
+    def export_adif_adi(db_filename, adi_filename):
+        try:
+            ADIF_VER = '3.0.4'
+            PROG_ID = 'otterlog'
+            log.info('Connecting to database: {}'.format(db_filename))
+            db = sqlite3.connect(db_filename)
+            cursor = db.cursor()
+            cursor.execute('SELECT * FROM qso ORDER BY id')
+            names = list(map(lambda x: x[0], cursor.description))
+            dat = datetime.datetime.utcnow()
+            f = open(adi_filename, 'w')
+            f.write('Generated on {} at {} UTC\n\n'.format(dat.strftime('%Y-%m-%d'), dat.strftime('%H:%M:%S')))
+            f.write('<adif_ver:{}:>{}\n'.format(len(ADIF_VER), ADIF_VER))
+            f.write('<programid:{}:>{}\n'.format(len(PROG_ID), PROG_ID))
+            f.write('<eoh>\n\n')
+            for row in cursor:
+                for i in range(len(row)):
+                    if names[i] == 'id' or names[i] == 'programid':
+                        continue
+                    if str(row[i]) == '':
+                        continue
+                    f.write('<{}:{}:>{}\n'.format(names[i], len(str(row[i])), str(row[i])))
+                f.write('<eor>\n\n')
+            f.close()
+        except Exception as e:
+            # Roll back any change if something goes wrong
+            db.rollback()
+            log.error('Something wrong.')
+            raise e
+        finally:
+            # Close the db connection
+            db.close()
+
+    def export_adif_adx(self):
+        pass

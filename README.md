@@ -1,20 +1,9 @@
 # otterlog
 <img src="https://github.com/xaratustrah/otterlog/blob/master/rsrc/otter.png" width=“128”>
 
-This is a log program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for daily use.
-There are tons of HAM log programs out there. This is yet another one, aiming to be ultra simple by using
-only the command line interface in order to store QSO data in a SQLite database. There are no editors,
-this means that the database file should be viewed using standard viewer programs, of which also many exist.
-Some examples are standalone programs such as [sqlitebrowser](https://github.com/sqlitebrowser/sqlitebrowser) or browser
-plugins such as [this one](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/). This
-leaves the HAM a great deal of freedom to import, export in/to any format and manage the database.
+This is a log program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for daily use. There are tons of HAM log programs out there. This is yet another one, aiming to be free, modern but as well ultra simple by using only the command line interface in order to store QSO data in a SQLite database. An export function to ADIF-3 \*.adi is also available.
 
-The typical usage of such a log program is for running on an ideally small or embedded computer such as
-[RaspberryPi2](https://en.wikipedia.org/wiki/Raspberry_Pi), as a HAM computer, where possibly also other HAM related
-software such as [fldigi](https://sourceforge.net/projects/fldigi/) are running, or HAM related hardware attached, such
-as [dongles](http://www.funcubedongle.com/) are also running.
-
-The name of this program is inspired by other HAM radio logger software available on the internet that have an animal name
+There are no editors, this means that the database file should be viewed using standard viewer programs, of which also many exist. Some examples are standalone programs such as [sqlitebrowser](https://github.com/sqlitebrowser/sqlitebrowser) or browser plugins such as [this one](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/). This leaves the HAM a great deal of freedom to import, export in/to any format and manage the database. The typical usage of such a log program is for running on an ideally small or embedded computer such as [RaspberryPi2](https://en.wikipedia.org/wiki/Raspberry_Pi), as a HAM computer, where possibly also other HAM related software such as [fldigi](https://sourceforge.net/projects/fldigi/) are running, or HAM related hardware attached, such as [dongles](http://www.funcubedongle.com/) are also running. The name of this program is inspired by other HAM radio logger software available on the internet that have an animal name
 in their title.
 
 #### Installation
@@ -33,9 +22,46 @@ Just type:
 
     otterlog
     
-In the command line and the program starts. If you like to skip an entry, just press enter. If no command line arguments
-are given at invocation time, then the program creates a folder in the home directory:
+In the command line and the program starts. If you like to skip an entry, just press enter. If no command line arguments are given at invocation time, then the program creates a folder in the home directory:
 
     ~/.otterlog/otterlog.sqlite
 
-otherwise a specific database filename can be given by the `-f` switch. `-v` switch increases the verbosity.
+otherwise a specific database filename can be given by the `-db` switch. `-v` switch increases the verbosity. If the switch `-adi` is provided, then an `*.adi` file is exported. For this export either the default database file name is used, or a database filename should be given.
+
+#### DB Fields and ADIF-3 export
+
+
+`otterlog` supports export to function to the ADIF3 \*.adi format. The [ADIF 3](http://adif.org/) standard has a very comprehensive list of fields. In order to find a minimalistic implementation of export function, `otterlog` adapts the minimum ADIF record fields required by the website [eQSL](https://www.eqsl.cc), but also includes additional fields. Minimum required by eQSL:
+
+|Field  |  Description|
+|---|---|
+|QSO_DATE| date on which the QSO started YYYYMMDD|
+|TIME_ON| QSO time in UTC|
+|CALL| the contacted station's Callsign|
+|MODE| QSO Mode|
+|BAND| QSO Band|
+
+Additional fields recommended by eQSL:
+
+|Field  |  Description|
+|---|---|
+|FREQ| QSO frequency in Megahertz|
+|PROP_MODE| QSO propagation mode|
+|PROGRAMID| identifies the name of the logger, converter, or utility that created or processed this ADIF file|
+|QSLMEG| QSL card message|
+|RST_SENT| signal report sent to the contacted station|
+
+
+Additional fields added by `otterlog`:
+
+|Field  |  Description|
+|---|---|
+| NAME | the contacted station's operator's name |
+| RST_RCVD | signal report from the contacted station|
+|RX_PWR | the contacted station's transmitter power in watts|
+|TX_PWR | the logging station's power in watts|
+|GRIDSQUARE | the contacted station's 2-character, 4-character, 6-character, or 8-character Maidenhead Grid Square|
+|NOTES | QSO Notes|
+
+
+That’s basically it.

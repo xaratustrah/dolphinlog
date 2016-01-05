@@ -7,7 +7,6 @@ classifiers = [
     'Environment :: Console',
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
-    'Intended Audience :: Information Technology',
     'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
     'Natural Language :: English',
     'Operating System :: OS Independent',
@@ -18,7 +17,7 @@ setup(
     name='otterlog',
     packages=find_packages(),
     version=__version__,
-    description='Yet another HAM radio logger using SQLite',
+    description='Yet another HAM radio logger using SQLite with ADIF-3 export support.',
     author='Xaratustra',
     author_email='shahab.sanjari@gmail.com',
     url='https://github.com/xaratustrah/otterlog',  # use the URL to the github repo
