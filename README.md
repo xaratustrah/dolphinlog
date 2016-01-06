@@ -31,20 +31,20 @@ otherwise a specific database filename can be given by the `-db` switch. `-v` sw
 #### DB Fields and ADIF-3 export
 
 
-`otterlog` supports export to function to the ADIF3 \*.adi format. The [ADIF 3](http://adif.org/) standard has a very comprehensive list of fields. In order to find a minimalistic implementation of export function, `otterlog` adapts the minimum ADIF record fields required by the website [eQSL](https://www.eqsl.cc), but also includes additional fields. Minimum required by eQSL:
+`otterlog` supports export to function to the ADIF3 \*.adi format. The [ADIF 3](http://adif.org/) standard has a very comprehensive list of fields. In order to find a minimalistic implementation of export function, `otterlog` adapts the minimum ADIF record fields required by the website [eQSL](https://www.eqsl.cc), but also includes additional fields. Minimum ADIF-3 fields required by eQSL:
 
 |Field  |  Description|
-|---|---|
+|-------|-------------|
 |QSO_DATE| date on which the QSO started YYYYMMDD|
 |TIME_ON| QSO time in UTC|
 |CALL| the contacted station's Callsign|
 |MODE| QSO Mode|
 |BAND| QSO Band|
 
-Additional fields recommended by eQSL:
+ADIF-3 fields fields recommended by eQSL:
 
 |Field  |  Description|
-|---|---|
+|-------|-------------|
 |FREQ| QSO frequency in Megahertz|
 |PROP_MODE| QSO propagation mode|
 |PROGRAMID| identifies the name of the logger, converter, or utility that created or processed this ADIF file|
@@ -52,10 +52,10 @@ Additional fields recommended by eQSL:
 |RST_SENT| signal report sent to the contacted station|
 
 
-Additional fields added by `otterlog`:
+ADIF-3 fields additionally used by `otterlog`:
 
 |Field  |  Description|
-|---|---|
+|-------|-------------|
 | NAME | the contacted station's operator's name |
 | RST_RCVD | signal report from the contacted station|
 |RX_PWR | the contacted station's transmitter power in watts|

@@ -3,6 +3,13 @@
 from setuptools import setup, find_packages
 from otterlog.version import __version__
 
+try:
+    import pypandoc
+
+    long_description = pypandoc.convert('README.md', 'rst')
+except(IOError, ImportError):
+    long_description = open('README.md').read()
+
 classifiers = [
     'Environment :: Console',
     'Programming Language :: Python :: 3.4',
@@ -18,6 +25,7 @@ setup(
     packages=find_packages(),
     version=__version__,
     description='Yet another HAM radio logger using SQLite with ADIF-3 export support.',
+    long_description=long_description,
     author='Xaratustra',
     author_email='shahab.sanjari@gmail.com',
     url='https://github.com/xaratustrah/otterlog',  # use the URL to the github repo
