@@ -11,8 +11,8 @@ import logging as log
 import os
 import sys
 import datetime
-from otterlog.version import __version__
-from otterlog.qsodata import QSOData
+from dolphinlog.version import __version__
+from dolphinlog.qsodata import QSOData
 
 
 def fill_in_data(qso_data):
@@ -116,7 +116,7 @@ def fill_in_data(qso_data):
 
 
 def main():
-    scriptname = 'otterlog'
+    scriptname = 'dolphinlog'
     home_folder = os.path.expanduser('~') + '/.{}/'.format(scriptname)
     default_db_filename = home_folder + '{}.sqlite'.format(scriptname)
 

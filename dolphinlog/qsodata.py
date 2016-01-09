@@ -34,7 +34,7 @@ class QSOData(object):
         self.band = None
         self.freq = None
         self.prop_mode = None
-        self.programid = 'otterlog'
+        self.programid = 'dolphinlog'
         self.qslmeg = None
         self.rst_sent = None
         self.name = None
@@ -166,7 +166,7 @@ class QSOData(object):
     def export_adif_adi(db_filename, adi_filename):
         try:
             ADIF_VER = '3.0.4'
-            PROG_ID = 'otterlog'
+            PROG_ID = 'dolphinlog'
             log.info('Connecting to database: {}'.format(db_filename))
             db = sqlite3.connect(db_filename)
             cursor = db.cursor()

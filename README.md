@@ -1,5 +1,7 @@
-# otterlog
-<img src="https://github.com/xaratustrah/otterlog/blob/master/rsrc/otter.png" width=“128”>
+# dolphinlog
+<img src="https://github.com/xaratustrah/dolphinlog/blob/master/rsrc/otter.png" width=“128”>
+
+This program has been renamed to `dolphinlog`.
 
 This is a log program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for daily use. There are tons of HAM log programs out there. This is yet another one, aiming to be free, modern but as well ultra simple by using only the command line interface in order to store QSO data in a SQLite database. An export function to ADIF-3 \*.adi is also available.
 
@@ -8,30 +10,30 @@ in their title.
 
 #### Installation
 
-`otterlog` is by nature platform independent. The simplest way to install it is to use PyPI:
+`dolphinlog` is by nature platform independent. The simplest way to install it is to use PyPI:
 
-    pip install otterlog
+    pip install dolphinlog
 
-Other than that `otterlog` needs just a working Python 3 installation. So whatever OS you have, just put the script
+Other than that `dolphinlog` needs just a working Python 3 installation. So whatever OS you have, just put the script
 somewhere you can call it, e.g. by symbolic linking like this:
  
-    ln -s otterlog /usr/local/bin/otterlog
+    ln -s dolphinlog /usr/local/bin/dolphinlog
 
 #### Usage
 Just type:
 
-    otterlog
+    dolphinlog
     
 In the command line and the program starts. If you like to skip an entry, just press enter. If no command line arguments are given at invocation time, then the program creates a folder in the home directory:
 
-    ~/.otterlog/otterlog.sqlite
+    ~/.dolphinlog/dolphinlog.sqlite
 
 otherwise a specific database filename can be given by the `-db` switch. `-v` switch increases the verbosity. If the switch `-adi` is provided, then an `*.adi` file is exported. For this export either the default database file name is used, or a database filename should be given.
 
 #### DB Fields and ADIF-3 export
 
 
-`otterlog` supports export to function to the ADIF3 \*.adi format. The [ADIF 3](http://adif.org/) standard has a very comprehensive list of fields. In order to find a minimalistic implementation of export function, `otterlog` adapts the minimum ADIF record fields required by the website [eQSL](https://www.eqsl.cc), but also includes additional fields. Minimum ADIF-3 fields required by eQSL:
+`dolphinlog` supports export to function to the ADIF3 \*.adi format. The [ADIF 3](http://adif.org/) standard has a very comprehensive list of fields. In order to find a minimalistic implementation of export function, `dolphinlog` adapts the minimum ADIF record fields required by the website [eQSL](https://www.eqsl.cc), but also includes additional fields. Minimum ADIF-3 fields required by eQSL:
 
 |Field  |  Description|
 |-------|-------------|
@@ -52,7 +54,7 @@ ADIF-3 fields fields recommended by eQSL:
 |RST_SENT| signal report sent to the contacted station|
 
 
-ADIF-3 fields additionally used by `otterlog`:
+ADIF-3 fields additionally used by `dolphinlog`:
 
 |Field  |  Description|
 |-------|-------------|
