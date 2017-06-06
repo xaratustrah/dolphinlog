@@ -1,7 +1,7 @@
 # dolphinlog
 <img src="https://github.com/xaratustrah/dolphinlog/blob/master/rsrc/dolphin.png" width=“128”>
 
-This program has been renamed to `dolphinlog`.
+This program has been renamed to `dolphinlog` to avoid naming conflict with another package.
 
 This is a log program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for daily use. There are tons of HAM log programs out there. This is yet another one, aiming to be free, modern but as well ultra simple by using only the command line interface in order to store QSO data in a SQLite database. An export function to ADIF-3 \*.adi is also available.
 
@@ -66,4 +66,4 @@ ADIF-3 fields additionally used by `dolphinlog`:
 |NOTES | QSO Notes|
 
 
-That’s basically it.
+That’s basically it folks. Enjoy.

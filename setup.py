@@ -10,6 +10,8 @@ from dolphinlog.version import __version__
 # except(IOError, ImportError):
 #     long_description = open('README.md').read()
 
+long_description = ''
+
 classifiers = [
     'Environment :: Console',
     'Programming Language :: Python :: 3.4',
@@ -25,7 +27,7 @@ setup(
     packages=find_packages(),
     version=__version__,
     description='Yet another HAM radio logger using SQLite with ADIF-3 export support.',
-    #long_description=long_description,
+    long_description=long_description,
     author='Xaratustra',
     author_email='shahab.sanjari@gmail.com',
     url='https://github.com/xaratustrah/dolphinlog',  # use the URL to the github repo
