@@ -28,8 +28,7 @@ setup(
     version=__version__,
     description='Yet another HAM radio logger using SQLite with ADIF-3 export support.',
     long_description=long_description,
-    author='Xaratustra',
-    author_email='shahab.sanjari@gmail.com',
+    author='xaratustrah',
     url='https://github.com/xaratustrah/dolphinlog',  # use the URL to the github repo
     download_url='https://github.com/xaratustrah/dolphinlog/tarball/{}'.format(__version__),
     entry_points={
