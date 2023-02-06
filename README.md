@@ -1,5 +1,5 @@
 # dolphinlog
-<img src="https://github.com/xaratustrah/dolphinlog/blob/master/rsrc/dolphin.png" width=“128”>
+<img src="https://github.com/xaratustrah/dolphinlog/blob/main/rsrc/dolphin.png" width=“128”>
 
 This program has been renamed to `dolphinlog` to avoid naming conflict with another package.
 
