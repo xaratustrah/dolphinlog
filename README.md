@@ -1,9 +1,9 @@
 # dolphinlog
 <img src="https://github.com/xaratustrah/dolphinlog/raw/main/rsrc/dolphin.png" width=“128”>
 
-This program has been renamed to `dolphinlog` to avoid naming conflict with another package.
+_This program has been renamed to **`dolphinlog`** in order to avoid naming conflict with another software. But as you can see, the logo still shows the original animal as icon!_
 
-This is a log program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for daily use. There are tons of HAM log programs out there. This is yet another one, aiming to be free, modern but as well ultra simple by using only the command line interface in order to store QSO data in a SQLite database. An export function to ADIF-3 \*.adi is also available.
+`dolphinlog` is a program for amateur radio [(HAM)](https://en.wikipedia.org/wiki/Amateur_radio) operators for their daily use. There are tons of HAM log programs out there. This is yet another one, aiming to be free, modern but as well ultra simple by using only the command line interface in order to store QSO data in a SQLite database. An export function to ADIF-3 \*.adi is also available.
 
 There are no editors, this means that the database file should be viewed using standard viewer programs, of which also many exist. Some examples are standalone programs such as [sqlitebrowser](https://github.com/sqlitebrowser/sqlitebrowser) or browser plugins such as [this one](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/). This leaves the HAM a great deal of freedom to import, export in/to any format and manage the database. The typical usage of such a log program is for running on an ideally small or embedded computer such as [RaspberryPi2](https://en.wikipedia.org/wiki/Raspberry_Pi), as a HAM computer, where possibly also other HAM related software such as [fldigi](https://sourceforge.net/projects/fldigi/) are running, or HAM related hardware attached, such as [dongles](http://www.funcubedongle.com/) are also running. The name of this program is inspired by other HAM radio logger software available on the internet that have an animal name
 in their title.
