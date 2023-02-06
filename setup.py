@@ -14,9 +14,8 @@ long_description = ''
 
 classifiers = [
     'Environment :: Console',
-    'Programming Language :: Python :: 3.4',
-    'Programming Language :: Python :: 3.5',
-    'License :: OSI Approved :: GNU General Public License v2 (GPLv2)',
+    'Programming Language :: Python :: 3 :: Only',
+    'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     'Natural Language :: English',
     'Operating System :: OS Independent',
     'Topic :: Communications :: Ham Radio'
@@ -36,7 +35,7 @@ setup(
             'dolphinlog = dolphinlog.__main__:main'
         ]
     },
-    license='GPLv2',
+    license='GPLv3',
     keywords=['HAM', 'Logging', 'Amateur Radio', 'QSO'],  # arbitrary keywords
     classifiers=classifiers
 )
